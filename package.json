@@ -8,6 +8,9 @@
   },
   "author": "Markus Danek",
   "license": "ISC",
+  "scripts": {
+    "start": "nodemon --exec node server/server.js"
+  },
   "dependencies": {
     "cryptocompare": "^0.3.0",
     "node-fetch": "^1.7.3"

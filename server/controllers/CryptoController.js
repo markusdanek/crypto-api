@@ -6,39 +6,45 @@ const ccHelper = require("../helper/cryptocompare.js");
 module.exports = {
     // GET /current
     getCurrentPrice: function(req, res, next) {
-      var price = ccHelper.getCurrentPrice('ETH');
+      const crypto = 'ETH';
+      // const crypto = req.param('crypto');
+      const price = ccHelper.getCurrentPrice(crypto);
       price.then(function(result) {
         res.json(result);
       })
     },
 
-    // GET /amount
-    ethCoinsInUSD: function(req, res, next) {
-      // var id = req.params.id;
-      var price = ccHelper.ethCoinsInUSD(0.4519);
+    // GET /portfolio
+    coinsInUSD: function(req, res, next) {
+      const coins = 0.4519;
+      const crypto = ['ETH', 'BTC'];
+      // const coins = req.param('coins');
+      // const crypto = req.param('crypto');
+      const price = ccHelper.coinsInUSD(crypto, coins);
       price.then(function(result){
-        res.json(result);
+        console.log(result);
       })
     },
 
-    // GET /pct
+    // GET /daily
     changePtc24Hour: function(req, res, next) {
-      var price = ccHelper.changePtc24Hour('ETH', 'USD');
+      const crypto = 'ETH';
+      // const crypto = req.param('crypto');
+      const price = ccHelper.changePtc24Hour(crypto, 'USD');
       price.then(function(result){
         res.json(result);
       })
     },
 
-    // GET /month
+    // GET /monthly
     getPricesLast7Days: function(req, res, next) {
       const lastWeek = timeHelper.last7Days();
       const coin = 'ETH';
-      let obj = {};
       const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
       (async function loop() {
-        for (var i = 0; i < lastWeek.length; i++) {
+        for (const i = 0; i < lastWeek.length; i++) {
           await delay(Math.random() * 100);
-          var prices = ccHelper.getPricesLast7Days(lastWeek[i], 'ETH');
+          var prices = ccHelper.getPricesLast7Days(lastWeek[i], coin);
           prices.then(function(result){
             console.log(result);
           })

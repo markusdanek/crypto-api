@@ -41,6 +41,9 @@ function ethCoinsInUSD(amount){
       const ethCoin = [];
       Object.keys(prices).forEach((key) => {
         ethCoin.push(prices[key]);
+        console.log("prices", prices);
+        console.log("prices[key]", prices[key]);
+        console.log("ethCoin", ethCoin);
       });
       const currentValue = amount * ethCoin;
       console.log(currentValue);
@@ -48,19 +51,19 @@ function ethCoinsInUSD(amount){
 }
 
 // Show last week
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-(async function loop() {
-    for (var i = 0; i < lastWeek.length; i++) {
-        await delay(Math.random() * 100);
-        getPricesLast7Days(lastWeek[i], 'ETH')
-    }
-})();
+// const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+// (async function loop() {
+//     for (var i = 0; i < lastWeek.length; i++) {
+//         await delay(Math.random() * 100);
+//         getPricesLast7Days(lastWeek[i], 'ETH')
+//     }
+// })();
 
 // Show today
 // getCurrentPrice('ETH');
 
 // Show current ETH value
-// ethCoinsInUSD(0.4519);
+ethCoinsInUSD(0.4519);
 
 // Show price change in 24 hours in percent
 // getPricesLast7Days('ETH', 'USD');
