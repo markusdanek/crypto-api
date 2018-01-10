@@ -7,13 +7,23 @@ module.exports = {
     // GET /current
     getCurrentPrice: function(req, res, next) {
       ccHelper.getCurrentPrice('ETH');
-      // cc.price('ETH', 'USD')
-      //   .then(prices => {
-      //     res.json(prices)
-      //   }).catch(err=>{
-      //     console.error(err)
-      //     return next(err);
-      // })
+
+      // works
+      cc.price('ETH', 'USD')
+        .then(prices => {
+          res.json(prices)
+        }).catch(err=>{
+          console.error(err)
+          return next(err);
+      })
+
+      // ccHelper.getCurrentPrice('ETH', function(){
+      //   res.json(prices);
+      // });
+
+      // const prices = ccHelper.getCurrentPrice('ETH');
+      // console.log(prices);
+      // res.json(prices);
     },
 
     // GET /amount
