@@ -2,7 +2,7 @@ global.fetch = require('node-fetch')
 const cc = require('cryptocompare')
 
 module.exports = {
-  getPrice: function(coin){
+  getCurrentPrice: function(coin){
     cc.price(coin, 'USD')
       .then(prices => {
         console.log(prices);
@@ -10,21 +10,24 @@ module.exports = {
       }).catch(console.error)
   },
 
-  getPricesTimespan: function(timestamp, coin){
+  getPricesLast7Days: function(timestamp, coin){
     cc.priceHistorical(coin, ['USD', 'EUR'], timestamp)
     .then(prices => {
       console.log(timestamp, prices);
+      return prices;
     }).catch(console.error)
   },
 
   changePtc24Hour: function(coin, currency){
     cc.priceFull(coin, currency)
     .then(prices => {
-      console.log(prices[coin][currency]["CHANGEPCT24HOUR"]);
+      const percentage = prices[coin][currency]["CHANGEPCT24HOUR"];
+      console.log(percentage);
+      return percentage;
     }).catch(console.error)
   },
 
-  ethInUSD: function(amount){
+  ethCoinsInUSD: function(amount){
     cc.price('ETH', 'USD')
       .then(prices => {
         const ethCoin = [];
@@ -33,6 +36,7 @@ module.exports = {
         });
         const currentValue = amount * ethCoin;
         console.log(currentValue);
+        return currentValue;
     }).catch(console.error)
   }
 };

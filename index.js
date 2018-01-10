@@ -58,10 +58,10 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 })();
 
 // Show today
-getPrice('ETH');
+// getPrice('ETH');
 
 // Show current ETH value
-ethInUSD(0.4519);
+// ethInUSD(0.4519);
 
 // Show price change in 24 hours in percent
-changePtc24Hour('ETH', 'USD');
+// changePtc24Hour('ETH', 'USD');
