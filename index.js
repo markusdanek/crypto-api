@@ -1,9 +1,8 @@
 global.fetch = require('node-fetch')
 const cc = require('cryptocompare')
 const moment = require('moment');
-const utils = require("./utils.js");
 
-const lastWeek = utils.last7Days();
+const lastWeek = last7Days();
 
 function last7Days() {
   var result = [];
@@ -15,14 +14,14 @@ function last7Days() {
   return result;
 }
 
-function getPrice(coin){
+function getCurrentPrice(coin){
   cc.price(coin, 'USD')
     .then(prices => {
       console.log(prices)
     }).catch(console.error)
 }
 
-function getPricesTimespan(timestamp, coin){
+function getPricesLast7Days(timestamp, coin){
   cc.priceHistorical(coin, ['USD', 'EUR'], timestamp)
   .then(prices => {
     console.log(timestamp, prices);
@@ -36,7 +35,7 @@ function changePtc24Hour(coin, currency){
   }).catch(console.error)
 }
 
-function ethInUSD(amount){
+function ethCoinsInUSD(amount){
   cc.price('ETH', 'USD')
     .then(prices => {
       const ethCoin = [];
@@ -53,15 +52,15 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 (async function loop() {
     for (var i = 0; i < lastWeek.length; i++) {
         await delay(Math.random() * 100);
-        getPricesTimespan(lastWeek[i], 'ETH')
+        getPricesLast7Days(lastWeek[i], 'ETH')
     }
 })();
 
 // Show today
-// getPrice('ETH');
+// getCurrentPrice('ETH');
 
 // Show current ETH value
-// ethInUSD(0.4519);
+// ethCoinsInUSD(0.4519);
 
 // Show price change in 24 hours in percent
-// changePtc24Hour('ETH', 'USD');
+// getPricesLast7Days('ETH', 'USD');
