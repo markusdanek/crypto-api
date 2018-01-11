@@ -1,3 +1,5 @@
+// Example to run locally with Node.js
+
 global.fetch = require('node-fetch')
 const cc = require('cryptocompare')
 const moment = require('moment');
