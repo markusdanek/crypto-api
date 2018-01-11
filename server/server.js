@@ -7,7 +7,7 @@ require('./services/express')(app, config);
 require('./routes/index')(app);
 require('./routes/crypto')(app);
 
-app.listen(config.port);
+app.listen(process.env.PORT || 9001);
 
 console.log("Server running on: " + "http://localhost:" + config.port);
 
