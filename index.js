@@ -14,56 +14,53 @@ function last7Days() {
   return result;
 }
 
-function getCurrentPrice(coin){
-  cc.price(coin, 'USD')
+function getCurrentPrice(crypto){
+  cc.price(crypto, 'USD')
     .then(prices => {
-      console.log(prices)
+      console.log("getCurrentPrice: ", prices)
     }).catch(console.error)
 }
 
-function getPricesLast7Days(timestamp, coin){
-  cc.priceHistorical(coin, ['USD', 'EUR'], timestamp)
+function getPricesLast7Days(timestamp, crypto){
+  cc.priceHistorical(crypto, ['USD', 'EUR'], timestamp)
   .then(prices => {
     console.log(timestamp, prices);
   }).catch(console.error)
 }
 
-function changePtc24Hour(coin, currency){
-  cc.priceFull(coin, currency)
+function changeLast24HourPCT(crypto, currency){
+  cc.priceFull(crypto, currency)
   .then(prices => {
-    console.log(prices[coin][currency]["CHANGEPCT24HOUR"]);
+    console.log("changeLast24HourPCT: ", prices[crypto][currency]["CHANGEPCT24HOUR"]);
   }).catch(console.error)
 }
 
-function ethCoinsInUSD(amount){
-  cc.price('ETH', 'USD')
+function coinInUSD(crypto, amount){
+  cc.price(crypto, 'USD')
     .then(prices => {
       const ethCoin = [];
       Object.keys(prices).forEach((key) => {
         ethCoin.push(prices[key]);
-        console.log("prices", prices);
-        console.log("prices[key]", prices[key]);
-        console.log("ethCoin", ethCoin);
       });
       const currentValue = amount * ethCoin;
-      console.log(currentValue);
+      console.log("coinInUSD: ", currentValue);
   }).catch(console.error)
 }
 
-// Show last week
-// const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-// (async function loop() {
-//     for (var i = 0; i < lastWeek.length; i++) {
-//         await delay(Math.random() * 100);
-//         getPricesLast7Days(lastWeek[i], 'ETH')
-//     }
-// })();
-
 // Show today
-// getCurrentPrice('ETH');
+getCurrentPrice('ETH');
 
 // Show current ETH value
-ethCoinsInUSD(0.4519);
+coinInUSD('ETH', 0.4519);
 
 // Show price change in 24 hours in percent
-// getPricesLast7Days('ETH', 'USD');
+changeLast24HourPCT('ETH', 'USD');
+
+// Show last week
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+(async function loop() {
+    for (var i = 0; i < lastWeek.length; i++) {
+        await delay(Math.random() * 1000);
+        getPricesLast7Days(lastWeek[i], 'ETH')
+    }
+})();

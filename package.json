@@ -17,6 +17,7 @@
     "node": "8.5.0"
   },
   "dependencies": {
+    "array-flatten": "^2.1.1",
     "cryptocompare": "^0.3.0",
     "node-fetch": "^1.7.3"
   },
