@@ -2,14 +2,15 @@ const express = require('express');
 const env = process.env.NODE_ENV || 'development';
 const app = express();
 const config = require('./config/config')[env];
+const port = process.env.PORT || 9001;
 
 require('./services/express')(app, config);
 require('./routes/index')(app);
 require('./routes/crypto')(app);
 
-app.listen(process.env.PORT || 9001);
+app.listen(port);
 
-console.log("Server running on: " + "http://localhost:" + config.port);
+console.log("Server running on: " + "http://localhost:" + port);
 
 // import http from 'http'
 // import { env, port, ip, apiRoot } from './config'
