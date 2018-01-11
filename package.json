@@ -3,13 +3,18 @@
   "version": "0.0.1",
   "description": "JavaScript API for crypto currencies",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Markus Danek",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "ssh://github.com/markusdanek/crypto-api.git"
+  },
   "scripts": {
-    "start": "nodemon --exec node server/server.js"
+    "start": "nodemon --exec node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "8.5.0"
   },
   "dependencies": {
     "cryptocompare": "^0.3.0",
