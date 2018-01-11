@@ -8,9 +8,8 @@ module.exports = {
     // GET /price
     // Returns the current price of 1 token
     price: function(req, res, next) {
-      const crypto = 'ETH';
       const cryptoParam = req.param('crypto');
-      const price = ccHelper.getCurrentPrice(crypto);
+      const price = ccHelper.getCurrentPrice(cryptoParam);
       price.then(function(result) {
         res.json(result);
       })
@@ -19,11 +18,9 @@ module.exports = {
     // GET /value
     // Return the value of holding tokens in Dollar
     coinInUSD: function(req, res, next) {
-      const coins = 0.4519;
-      const crypto = 'ETH';
       const coinsParam = req.param('coins');
       const cryptoParam = req.param('crypto');
-      const price = ccHelper.coinInUSD(crypto, coins);
+      const price = ccHelper.coinInUSD(cryptoParam, coinsParam);
       price.then(function(result){
         res.json(result);
       });
@@ -68,9 +65,8 @@ module.exports = {
     // GET /daily
     // Return value change of crypto coin in last 24 hours
     changeLast24HourPCT: function(req, res, next) {
-      const crypto = 'ETH';
       const cryptoParam = req.param('crypto');
-      const price = ccHelper.changeLast24HourPCT(crypto);
+      const price = ccHelper.changeLast24HourPCT(cryptoParam);
       price.then(function(result){
         res.json(result);
       })
@@ -79,7 +75,6 @@ module.exports = {
     // GET /monthly
     // Return prices of crypto coin of last 7 days
     getPricesLast7Days: function(req, res, next) {
-      const crypto = 'ETH';
       const cryptoParam = req.param('crypto');
       let lastWeek = timeHelper.last7Days();
       let finalArray = [];
@@ -87,7 +82,7 @@ module.exports = {
       (async function loop() {
         for (let i = 0; i < lastWeek.length; i++) {
           await delay(Math.random() * 100);
-          let prices = ccHelper.getPricesLast7Days(lastWeek[i], crypto);
+          let prices = ccHelper.getPricesLast7Days(lastWeek[i], cryptoParam);
           prices.then(function(prices){
             finalArray.push(prices);
           })
