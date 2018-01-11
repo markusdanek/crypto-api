@@ -16,7 +16,7 @@ module.exports = {
       })
     },
 
-    // GET /portfolio
+    // GET /value
     // Return the value of holding tokens in Dollar
     coinInUSD: function(req, res, next) {
       const coins = 0.4519;
@@ -29,7 +29,8 @@ module.exports = {
       });
     },
 
-    // GET /sum
+    // GET /portfolio
+    // Return the worth of all crypto coins in USD
     portfolio: function(req, res, next) {
       const ethCoins = 0.5250;
       const ltcCoins = 0.1758;
