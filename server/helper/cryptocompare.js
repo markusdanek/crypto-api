@@ -16,7 +16,8 @@ module.exports = {
         Object.keys(prices).forEach((key) => {
           priceArray.push(prices[key]);
         });
-        const currentValue = amount * priceArray;
+        let priceSum = priceArray.reduce((a, v) => (a+v), 0);
+        const currentValue = amount * priceSum;
         return currentValue;
     }).catch(console.error)
   },

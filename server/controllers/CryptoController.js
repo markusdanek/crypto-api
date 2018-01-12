@@ -34,7 +34,6 @@ module.exports = {
       const xrpCoins = 24.97500000;
       const xrbCoins = 2.08100192;
       const btcCoins = 0.00781685;
-      let ethSum, btcSum, ltcSum, xrpSum, xrbSum, cryptoSum;
 
       let ethValue = ccHelper.coinInUSD('ETH', ethCoins);
       let ltcValue = ccHelper.coinInUSD('LTC', ltcCoins);
@@ -42,24 +41,10 @@ module.exports = {
       let xrbValue = ccHelper.coinInUSD('XRB', xrbCoins);
       let btcValue = ccHelper.coinInUSD('BTC', btcCoins);
 
-      ethValue.then(result => {
-        ethSum = result;
-        ltcValue.then(result => {
-          ltcSum = result;
-          xrpValue.then(result => {
-            xrpSum = result;
-            xrbValue.then(result => {
-              xrbSum = result;
-              btcValue.then(result => {
-                btcSum = result;
-                let coinSum = ethSum + ltcSum + xrpSum + xrbSum + btcSum;
-                res.json(coinSum);
-              })
-            })
-          })
-        })
-      })
-
+      Promise.all([ethValue, ltcValue, xrpValue, xrbValue, btcValue]).then(values => {
+        let coinSum = values.reduce((a, v) => (a+v), 0);
+        res.json(coinSum);
+      }).catch(e => console.error(e));
     },
 
     // GET /daily
