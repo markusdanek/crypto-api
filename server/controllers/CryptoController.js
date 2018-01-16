@@ -75,5 +75,17 @@ module.exports = {
         await delay(Math.random() * 1000);
         res.json(flatten(finalArray))
       })();
+    },
+
+    getPricesForTimestamp: function(req, res, next) {
+      const cryptoParam = req.param('crypto');
+      const dayParam = req.param('day');
+      console.log(dayParam);
+      const timestamp = Date.parse(dayParam);
+      console.log(timestamp);
+      const price = ccHelper.getPricesForTimestamp(cryptoParam, dayParam);
+      price.then(function(result){
+        res.json(result);
+      })
     }
 };
