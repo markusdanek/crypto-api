@@ -18,8 +18,8 @@ module.exports = {
     // GET /value
     // Return the value of holding tokens in Dollar
     coinInUSD: function(req, res, next) {
-      const coinsParam = req.param('coins');
       const cryptoParam = req.param('crypto');
+      const coinsParam = req.param('coins');
       const price = ccHelper.coinInUSD(cryptoParam, coinsParam);
       price.then(function(result){
         res.json(result);
