@@ -49,4 +49,11 @@ module.exports = {
       return [timestamp, prices];
     }).catch(console.error)
   },
+
+  getPricesForTimestamp: function(crypto, timestamp){
+    return cc.priceHistorical(crypto, ['USD'], timestamp)
+    .then(prices => {
+      return prices;
+    }).catch(console.error)
+  },
 };
