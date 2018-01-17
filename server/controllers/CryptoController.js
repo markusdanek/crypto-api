@@ -82,7 +82,8 @@ module.exports = {
     getPricesForTimestamp: function(req, res, next) {
       const cryptoParam = req.param('crypto');
       const dayParam = req.param('day');
-      const price = ccHelper.getPricesForTimestamp(cryptoParam, dayParam);
+      const timestamp = new Date(dayParam);
+      const price = ccHelper.getPricesForTimestamp(cryptoParam, timestamp);
       price.then(function(result){
         res.json(result);
       })
