@@ -77,12 +77,11 @@ module.exports = {
       })();
     },
 
+    // GET /historicprice
+    // Return price for specific timestamp
     getPricesForTimestamp: function(req, res, next) {
       const cryptoParam = req.param('crypto');
       const dayParam = req.param('day');
-      console.log(dayParam);
-      const timestamp = Date.parse(dayParam);
-      console.log(timestamp);
       const price = ccHelper.getPricesForTimestamp(cryptoParam, dayParam);
       price.then(function(result){
         res.json(result);

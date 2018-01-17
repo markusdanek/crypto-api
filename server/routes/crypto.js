@@ -7,5 +7,5 @@ module.exports = function(app) {
     app.get('/portfolio', controllers.crypto.portfolio);
     app.get('/daily', controllers.crypto.changeLast24HourPCT);
     app.get('/monthly', controllers.crypto.getPricesLast7Days);
-    app.get('/historyprice', controllers.crypto.getPricesForTimestamp);
+    app.get('/historicprice', controllers.crypto.getPricesForTimestamp);
 };
