@@ -2,15 +2,15 @@ global.fetch = require('node-fetch');
 const cc = require('cryptocompare');
 
 module.exports = {
-  getCurrentPrice: function(crypto){
-    return cc.price(crypto, 'USD')
+  getCurrentPrice: function(crypto, currency){
+    return cc.price(crypto, currency)
       .then(prices => {
         return prices;
       }).catch(console.error)
   },
 
-  coinInUSD: function(crypto, amount){
-    return cc.price(crypto, 'USD')
+  coinInUSD: function(crypto, amount, currency){
+    return cc.price(crypto, currency)
       .then(prices => {
         const priceArray = [];
         Object.keys(prices).forEach((key) => {
@@ -22,8 +22,8 @@ module.exports = {
     }).catch(console.error)
   },
 
-  coinsInUSD: function(crypto, amount){
-    return cc.priceMulti(crypto, 'USD')
+  coinsInUSD: function(crypto, amount, currency){
+    return cc.priceMulti(crypto, currency)
       .then(prices => {
         let coins = [];
         Object.keys(prices).forEach((key) => {
@@ -35,25 +35,25 @@ module.exports = {
     }).catch(console.error)
   },
 
-  changeLast24HourPCT: function(crypto){
-    return cc.priceFull(crypto, 'USD')
-    .then(prices => {
-      const percentage = prices[crypto]['USD']["CHANGEPCT24HOUR"];
-      return percentage;
-    }).catch(console.error)
+  changeLast24HourPCT: function(crypto, currency){
+    return cc.priceFull(crypto, currency)
+      .then(prices => {
+        const percentage = prices[crypto][currency]["CHANGEPCT24HOUR"];
+        return percentage;
+      }).catch(console.error)
   },
 
-  getPricesLast7Days: function(timestamp, crypto){
-    return cc.priceHistorical(crypto, ['USD'], timestamp)
-    .then(prices => {
-      return [timestamp, prices];
-    }).catch(console.error)
+  getPricesLast7Days: function(timestamp, crypto, currency){
+    return cc.priceHistorical(crypto, [currency], timestamp)
+      .then(prices => {
+        return [timestamp, prices];
+      }).catch(console.error)
   },
 
-  getPricesForTimestamp: function(crypto, timestamp){
-    return cc.priceHistorical(crypto, ['USD'], timestamp)
-    .then(prices => {
-      return prices;
-    }).catch(console.error)
+  getPricesForTimestamp: function(crypto, timestamp, currency){
+    return cc.priceHistorical(crypto, [currency], timestamp)
+      .then(prices => {
+        return prices;
+      }).catch(console.error)
   },
 };
